@@ -1,0 +1,14 @@
+<section>
+    <slot />
+</section>
+
+<style lang="scss">
+    section {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+    }
+</style>
