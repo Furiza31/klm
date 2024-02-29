@@ -1,9 +1,9 @@
 <script>
-    import './global.scss';
+	import './global.scss';
 </script>
 
 <main>
-    <slot />
+	<slot />
 </main>
 
 <style lang="scss">
