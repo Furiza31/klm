@@ -11,10 +11,6 @@
 	color: $secondary;
 }
 
-body {
-	background: radial-gradient($background-primary -100%, $background-secondary);
-}
-
 a {
 	text-decoration: none;
 	color: $link;

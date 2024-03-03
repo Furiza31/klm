@@ -1,5 +1,15 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { afterUpdate } from 'svelte';
+	import { reveal } from 'svelte-reveal';
+	import Button from '../../../components/button/Button.svelte';
+	import Input from '../../../components/input/Input.svelte';
+
+	let show = false;
+
+	afterUpdate(() => {
+		show = true;
+	});
 
 	let loading = false;
 
@@ -15,75 +25,68 @@
 			confirmPassword?: string[];
 		};
 	};
-
-	$: console.log(loading);
 </script>
 
-<div class="register">
-	<h1>Register</h1>
+<svelte:head>
+	<title>KLM | Register</title>
+</svelte:head>
 
-	<form action="?/register" method="post" use:enhance>
-		<div>
-			<label for="username">Username</label>
-			<input
-				type="text"
+{#if show}
+	<div use:reveal={{ transition: 'fly', duration: 300 }}>
+		<h1>Register</h1>
+
+		<form
+			action="?/register"
+			method="post"
+			use:enhance={() => {
+				loading = true;
+				return async ({ update }) => {
+					loading = false;
+					update();
+				};
+			}}
+		>
+			<Input
+				label="Username"
 				id="username"
 				name="username"
 				value={form?.data?.username ?? ''}
-				class={form?.errors?.username ? 'error' : ''}
+				errors={form?.errors?.username}
 			/>
-			{#if form?.errors?.username}
-				<span>{form.errors.username[0]}</span>
-			{/if}
-		</div>
-		<div>
-			<label for="email">Email</label>
-			<input
-				type="email"
+			<Input
+				label="Email"
 				id="email"
 				name="email"
+				type="email"
 				value={form?.data?.email ?? ''}
-				class={form?.errors?.email ? 'error' : ''}
+				errors={form?.errors?.email}
 			/>
-			{#if form?.errors?.email}
-				<span>{form.errors.email[0]}</span>
-			{/if}
-		</div>
-		<div>
-			<label for="password">Password</label>
-			<input
-				type="password"
+			<Input
+				label="Password"
 				id="password"
 				name="password"
-				class={form?.errors?.password ? 'error' : ''}
-			/>
-			{#if form?.errors?.password}
-				<span>{form.errors.password[0]}</span>
-			{/if}
-		</div>
-		<div>
-			<label for="confirmPassword">Confirm Password</label>
-			<input
 				type="password"
+				errors={form?.errors?.password}
+			/>
+			<Input
+				label="Confirm Password"
 				id="confirmPassword"
 				name="confirmPassword"
-				class={form?.errors?.confirmPassword ? 'error' : ''}
+				type="password"
+				errors={form?.errors?.confirmPassword}
 			/>
-			{#if form?.errors?.confirmPassword}
-				<span>{form.errors.confirmPassword[0]}</span>
-			{/if}
-		</div>
-		<button type="submit">Register</button>
-	</form>
-	<p>
-		Already have an account? You can login yourself <a href="/auth/login">here!</a>
-	</p>
-</div>
+			<Button {loading} disabled={loading}>Register</Button>
+		</form>
+		<p>
+			Already have an account? You can login yourself <a href="/auth/login">here!</a>
+		</p>
+	</div>
+{/if}
 
 <style lang="scss">
 	@import '../../variables.scss';
 
-	div.register {
+	div {
 		position: relative;
 		display: flex;
 		flex-flow: column nowrap;
@@ -120,63 +123,6 @@
 			align-items: center;
 			gap: 20px;
 			width: 100%;
-
-			div {
-				position: relative;
-				display: flex;
-				flex-flow: column nowrap;
-				justify-content: flex-start;
-				align-items: flex-start;
-				width: 100%;
-				gap: 5px;
-
-				label {
-					position: relative;
-					display: block;
-					font-weight: bold;
-				}
-
-				input {
-					position: relative;
-					display: block;
-					width: 100%;
-					padding: 5px;
-					border: 1px solid $secondary;
-					border-radius: 5px;
-
-					&:focus {
-						border-color: $primary;
-					}
-				}
-
-				input.error {
-					border-color: $danger;
-				}
-
-				span {
-					position: relative;
-					display: block;
-					color: $danger;
-					font-size: 0.8em;
-				}
-			}
-
-			button {
-				position: relative;
-				display: block;
-				padding: 10px 20px;
-				border: none;
-				border-radius: 5px;
-				background-color: $primary;
-				color: $white;
-				font-weight: bold;
-				cursor: pointer;
-				width: 50%;
-
-				&:hover {
-					width: 55%;
-				}
-			}
 		}
 	}
 </style>
