@@ -64,13 +64,13 @@ export const actions = {
 		}
 
 		const token = jwt.sign({ user }, JWT_SECRET, {
-			expiresIn: 60 * 60 * 24 * 7 * 365
+			expiresIn: 60 * 60 * 24
 		});
 
 		const localstorage = new LocalStorage(cookies);
 
 		localstorage.set('token', token);
 
-		return redirect(303, '/app');
+		throw redirect(303, '/app');
 	}
 } satisfies Actions;

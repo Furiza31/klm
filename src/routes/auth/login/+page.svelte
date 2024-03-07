@@ -37,7 +37,7 @@
 			method="post"
 			use:enhance={() => {
 				loading = true;
-				return async ({ update }) => {
+				return async ({ update, result }) => {
 					loading = false;
 					update();
 				};

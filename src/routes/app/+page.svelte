@@ -1,6 +1,8 @@
 <script lang="ts">
 </script>
 
-<section>
-	<h1>app</h1>
-</section>
+<svelte:head>
+	<title>KLM | Home</title>
+</svelte:head>
+
+<h1>App</h1>

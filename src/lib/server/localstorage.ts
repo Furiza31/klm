@@ -8,10 +8,14 @@ class LocalStorage {
 	}
 
 	set(key: string, value: string) {
+		if (value === null || value === undefined || value === '') this.remove(key);
 		this.cookies.set(key, value, {
 			path: '/',
-			maxAge: 60 * 60 * 24 * 7 * 365, // 1 year
-			httpOnly: false
+			// maxAge: 60 * 60 * 24 * 7 * 365, // 1 year
+			maxAge: 60 * 60 * 24, // 1 day
+			httpOnly: true,
+			sameSite: 'strict',
+			secure: false
 		});
 	}
 
@@ -27,7 +31,10 @@ class LocalStorage {
 	remove(key: string) {
 		this.cookies.set(key, '', {
 			path: '/',
-			maxAge: 0
+			maxAge: 0,
+			httpOnly: true,
+			sameSite: 'strict',
+			secure: false
 		});
 	}
 
@@ -36,7 +43,10 @@ class LocalStorage {
 		cookiesMap.forEach((value, key) => {
 			this.cookies.set(key, '', {
 				path: '/',
-				maxAge: 0
+				maxAge: 0,
+				httpOnly: true,
+				sameSite: 'strict',
+				secure: false
 			});
 		});
 	}
