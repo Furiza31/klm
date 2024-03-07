@@ -1,40 +1,21 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { isNavBarOpen } from '$lib/client/stores/navBar';
-	let path: string;
-
-	$: path = $page.url.pathname;
-
-	const match = (regex: string) => {
-		return new RegExp(regex).test(path);
-	};
+	import { activeLink } from '$lib/client/stores/navBar';
 </script>
 
 <nav class:open={$isNavBarOpen}>
 	<ul>
 		<li>
-			<a href="/app" class:active={match('^/app$')}><i class="fa-solid fa-house"></i>Home</a>
+			<a href="/app" class:active={$activeLink === "/app"}><i class="fa-solid fa-house"></i>Home</a>
 		</li>
 		<li>
-			<a
-				href="/todolists"
-				class:active={match('^/todolist') ||
-					match('^/todolists/new') ||
-					match('^/todolists/[0-9]+') ||
-					match('^/todolists/[0-9]+/edit') ||
-					match('^/todolists/[0-9]+/') ||
-					match('^/todolists/[0-9]+/tasks') ||
-					match('^/todolists/[0-9]+/tasks/new') ||
-					match('^/todolists/[0-9]+/tasks/[0-9]+') ||
-					match('^/todolists/[0-9]+/tasks/[0-9]+/edit')}
-				><i class="fa-solid fa-list"></i>Todo List</a
-			>
+			<a href="/app/todolists" class:active={$activeLink === "/app/todolists"}><i class="fa-solid fa-list"></i>Todo Lists</a>
 		</li>
 	</ul>
 	<ul>
 		<li>
-			<a href="/settings" class:active={match('^/settings$') || match('^/settings/')}
-				><i class="fa-solid fa-cog"></i>Settings</a
+			<a href="/settings" class:active={$activeLink === "/settings"}><i class="fa-solid fa-cog"></i>Settings</a
 			>
 		</li>
 		<li>
