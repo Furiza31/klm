@@ -1,15 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { afterUpdate } from 'svelte';
-	import { reveal } from 'svelte-reveal';
 	import Button from '../../../components/button/Button.svelte';
 	import Input from '../../../components/input/Input.svelte';
-
-	let show = false;
-
-	afterUpdate(() => {
-		show = true;
-	});
 
 	let loading = false;
 
@@ -28,43 +20,41 @@
 	<title>KLM | Login</title>
 </svelte:head>
 
-{#if show}
-	<div use:reveal={{ transition: 'fly', duration: 300 }}>
-		<h1>Login</h1>
+<div>
+	<h1>Login</h1>
 
-		<form
-			action="?/login"
-			method="post"
-			use:enhance={() => {
-				loading = true;
-				return async ({ update, result }) => {
-					loading = false;
-					update();
-				};
-			}}
-		>
-			<Input
-				label="Email"
-				id="email"
-				name="email"
-				type="email"
-				value={form?.data?.email ?? ''}
-				errors={form?.errors?.email}
-			/>
-			<Input
-				label="Password"
-				id="password"
-				name="password"
-				type="password"
-				errors={form?.errors?.password}
-			/>
-			<Button {loading} disabled={loading}>Login</Button>
-		</form>
-		<p>
-			Already have an account? You can login yourself <a href="/auth/register">here!</a>
-		</p>
-	</div>
-{/if}
+	<form
+		action="?/login"
+		method="post"
+		use:enhance={() => {
+			loading = true;
+			return async ({ update, result }) => {
+				loading = false;
+				update();
+			};
+		}}
+	>
+		<Input
+			label="Email"
+			id="email"
+			name="email"
+			type="email"
+			value={form?.data?.email ?? ''}
+			errors={form?.errors?.email}
+		/>
+		<Input
+			label="Password"
+			id="password"
+			name="password"
+			type="password"
+			errors={form?.errors?.password}
+		/>
+		<Button {loading} disabled={loading}>Login</Button>
+	</form>
+	<p>
+		Already have an account? You can login yourself <a href="/auth/register">here!</a>
+	</p>
+</div>
 
 <style lang="scss">
 	@import '../../variables.scss';
@@ -83,6 +73,7 @@
 		background-color: $white;
 		width: 100%;
 		max-width: 400px;
+		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
 		h1 {
 			position: relative;
@@ -106,6 +97,15 @@
 			align-items: center;
 			gap: 20px;
 			width: 100%;
+		}
+	}
+
+	@keyframes zoom {
+		from {
+			transform: scale(0);
+		}
+		to {
+			transform: scale(1);
 		}
 	}
 </style>

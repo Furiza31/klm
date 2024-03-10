@@ -36,6 +36,7 @@
 		width: 100%;
 		height: $header-height;
 		padding: 10px 20px;
+		z-index: 1000;
 
 		display: flex;
 		justify-content: space-between;

@@ -1,21 +1,22 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { isNavBarOpen } from '$lib/client/stores/navBar';
-	import { activeLink } from '$lib/client/stores/navBar';
+	import { activeLink, isNavBarOpen } from '$lib/client/stores/navBar';
 </script>
 
 <nav class:open={$isNavBarOpen}>
 	<ul>
 		<li>
-			<a href="/app" class:active={$activeLink === "/app"}><i class="fa-solid fa-house"></i>Home</a>
+			<a href="/app" class:active={$activeLink === '/app'}><i class="fa-solid fa-house"></i>Home</a>
 		</li>
 		<li>
-			<a href="/app/todolists" class:active={$activeLink === "/app/todolists"}><i class="fa-solid fa-list"></i>Todo Lists</a>
+			<a href="/app/todolists" class:active={$activeLink === '/app/todolists'}
+				><i class="fa-solid fa-list"></i>Todo Lists</a
+			>
 		</li>
 	</ul>
 	<ul>
 		<li>
-			<a href="/settings" class:active={$activeLink === "/settings"}><i class="fa-solid fa-cog"></i>Settings</a
+			<a href="/settings" class:active={$activeLink === '/settings'}
+				><i class="fa-solid fa-cog"></i>Settings</a
 			>
 		</li>
 		<li>
@@ -33,10 +34,10 @@
 		padding: 20px;
 		width: 250px;
 		height: calc(100vh - $header-height);
-		animation-name: slideIn;
-		animation-duration: 0.3s;
+		animation: slideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 		background-color: $background-primary;
 		border-right: 1px solid $secondary;
+		z-index: 1001;
 
 		ul {
 			position: relative;
