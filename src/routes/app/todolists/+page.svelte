@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { headerTitle } from '$lib/client/stores/header';
 	import { activeLink } from '$lib/client/stores/navBar';
-	import TodoListForm from '../../../components/froms/TodoList/TodoListForm.svelte';
+	// import TodoListForm from '../../../components/froms/TodoList/TodoListForm.svelte';
 	import InputNoLabel from '../../../components/input/InputNoLabel.svelte';
 	import Modal from '../../../components/modal/Modal.svelte';
 	$headerTitle = 'Todo Lists';
@@ -25,7 +25,7 @@
 
 	<Modal bind:showModal buttonTitle="Create">
 		<h1 slot="header" class="modalTitle">New Todo List</h1>
-		<TodoListForm />
+		<!-- <TodoListForm /> -->
 	</Modal>
 </section>
 
