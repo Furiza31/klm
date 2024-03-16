@@ -38,6 +38,10 @@
 		background-color: $background-primary;
 		border-right: 1px solid $secondary;
 		z-index: 1001;
+		max-width: 250px;
+		min-width: 250px;
+		left: 0px;
+		top: $header-height;
 
 		ul {
 			position: relative;
@@ -62,21 +66,33 @@
 					width: 100%;
 					padding: 10px 20px;
 					font-size: 1.2rem;
-					background-color: $secondary;
+					background-color: transparent;
+					border: 1px solid $secondary;
 					border-radius: 7px;
-					color: $white;
+					color: $secondary;
 
 					&:hover {
 						background-color: $primary;
 						gap: 15px;
+						color: $white;
+
+						i {
+							color: $white;
+						}
 					}
 
 					i {
-						color: $white;
+						color: $secondary;
 					}
 
 					&.logout {
 						background-color: $danger;
+						color: $white;
+
+						i {
+							color: $white;
+						}
+
 						&:hover {
 							background-color: $danger;
 						}
@@ -85,6 +101,11 @@
 					&.active {
 						background-color: $primary;
 						gap: 15px;
+						color: $white;
+
+						i {
+							color: $white;
+						}
 					}
 				}
 			}

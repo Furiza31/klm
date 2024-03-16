@@ -15,4 +15,23 @@ model User {
   email    String   @unique
   username     String
   password String
+  todoLists TodoList[]
+}
+
+model TodoList {
+  id     Int      @id @default(autoincrement())
+  title  String
+  todos  Todo[]
+  user   User     @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+model Todo {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  done        Boolean   @default(false)
+  date        DateTime 
+  todoList    TodoList  @relation(fields: [todoListId], references: [id])
+  todoListId  Int
 }

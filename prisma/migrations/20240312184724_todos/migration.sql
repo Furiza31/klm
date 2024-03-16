@@ -1,0 +1,18 @@
+-- CreateTable
+CREATE TABLE "TodoList" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    CONSTRAINT "TodoList_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Todo" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "done" BOOLEAN NOT NULL DEFAULT false,
+    "date" DATETIME NOT NULL,
+    "todoListId" INTEGER NOT NULL,
+    CONSTRAINT "Todo_todoListId_fkey" FOREIGN KEY ("todoListId") REFERENCES "TodoList" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

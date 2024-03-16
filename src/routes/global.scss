@@ -23,3 +23,20 @@ a {
 input {
 	outline: none;
 }
+
+/* width */
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: $lightgrey;
+	border-radius: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: $secondary;
+	border-radius: 7px;
+}

@@ -17,5 +17,6 @@
 		display: flex;
 		flex-flow: row nowrap;
 		background-color: $background-primary;
+		min-height: calc(100vh - $header-height);
 	}
 </style>

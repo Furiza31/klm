@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import { reveal } from 'svelte-reveal';
 
 	export let icon: string;
@@ -10,12 +11,26 @@
 	export let errors: string[] = [];
 
 	$: errors = errors ?? [];
+
+	const dispatch = createEventDispatcher();
+
+	const handleInput = (event: Event & { currentTarget: HTMLInputElement }) => {
+		dispatch('input', event.currentTarget.value);
+	};
 </script>
 
 <div>
 	<div class="inputContainer">
 		<label for={id}><i class={icon} /></label>
-		<input {type} {id} {name} {value} {placeholder} class:error={errors.length > 0} />
+		<input
+			{type}
+			{id}
+			{name}
+			{value}
+			{placeholder}
+			class:error={errors.length > 0}
+			on:input={handleInput}
+		/>
 	</div>
 	{#each errors as error}
 		<span class="error" use:reveal={{ transition: 'fly', duration: 200 }}>{error}</span>
@@ -43,7 +58,7 @@
 			background-color: $lightgrey;
 			padding: 10px 15px;
 			gap: 10px;
-			border-radius: 10px;
+			border-radius: 5px;
 			border: 1px solid $secondary;
 
 			&:has(> input:focus) {
