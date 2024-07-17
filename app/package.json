@@ -10,6 +10,10 @@
     "build:android": "npm run build && npx cap add android",
     "build:ios": "npm run build && npx cap add ios"
   },
+  "author": "Furiza31",
+  "license": "ISC",
+  "repository": "https://github.com/Furiza31/klm.git",
+  "description": "KLM, a mobile app for managing your life.",
   "dependencies": {
     "@capacitor/android": "^6.1.0",
     "@capacitor/cli": "^6.1.0",

@@ -12,7 +12,8 @@
   },
   "author": "Furiza31",
   "license": "ISC",
-  "description": "",
+  "repository": "https://github.com/Furiza31/klm.git",
+  "description": "API for KLM",
   "dependencies": {
     "@prisma/client": "^5.17.0",
     "bcryptjs": "^2.4.3",
