@@ -16,10 +16,10 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  tasksGroups   TasksGroup[]
+  tasksGroups   TaskGroup[]
 }
 
-model Tasks {
+model Task {
   id            Int      @id @default(autoincrement())
   title         String
   status        String
@@ -30,16 +30,16 @@ model Tasks {
   updatedAt     DateTime @updatedAt
 
   groupId       Int
-  group         TasksGroup @relation(fields: [groupId], references: [id])
+  group         TaskGroup @relation(fields: [groupId], references: [id])
 }
 
-model TasksGroup {
+model TaskGroup {
   id            Int      @id @default(autoincrement())
   title         String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  tasks         Tasks[]
+  tasks         Task[]
   userId        Int
   user          User @relation(fields: [userId], references: [id])
 }
