@@ -15,4 +15,31 @@ model User {
   language      String   @default("en-US")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  tasksGroups   TasksGroup[]
+}
+
+model Tasks {
+  id            Int      @id @default(autoincrement())
+  title         String
+  status        String
+  description   String?
+  dueDate       String?
+  dueTime       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  groupId       Int
+  group         TasksGroup @relation(fields: [groupId], references: [id])
+}
+
+model TasksGroup {
+  id            Int      @id @default(autoincrement())
+  title         String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  tasks         Tasks[]
+  userId        Int
+  user          User @relation(fields: [userId], references: [id])
 }
