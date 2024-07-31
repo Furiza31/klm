@@ -11,4 +11,4 @@ const router: Router = createRouter({
 router.beforeEach(authMiddleware);
 router.afterEach(titleMiddleware);
 
-export default router;
+export { router };

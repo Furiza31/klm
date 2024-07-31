@@ -6,6 +6,6 @@ const { t } = useTranslation();
 
 <template>
   <section class="h-full w-full bg-background p-3">
-    <h1>{{ t("Dashboard") }}</h1>
+    <h1>{{ t("Settings") }}</h1>
   </section>
 </template>

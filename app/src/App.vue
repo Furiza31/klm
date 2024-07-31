@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { Toaster } from "@/components/ui/sonner";
+import { useTranslation } from "@/services/Translation";
+import { useUserStore } from "@/stores/User";
+import { onMounted } from "vue";
 import { RouterView } from "vue-router";
+
+const { locale } = useTranslation();
+const user = useUserStore();
+
+onMounted(() => {
+  locale.value = (user.language as any) || "en-US";
+});
 </script>
 
 <template>

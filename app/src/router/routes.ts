@@ -45,6 +45,22 @@ export const routes: Array<RouteRecordRaw> = [
           backTo: "Dashboard",
         },
       },
+      {
+        path: "settings",
+        name: "Settings",
+        component: () => import("@/pages/app/settings/Index.vue"),
+        meta: {
+          backTo: "Dashboard",
+        },
+      },
+      {
+        path: "settings/language",
+        name: "Language",
+        component: () => import("@/pages/app/settings/Language.vue"),
+        meta: {
+          backTo: "Settings",
+        },
+      },
     ],
   },
 ];

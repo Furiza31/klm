@@ -15,7 +15,7 @@ export const useUserStore = defineStore("user", {
           updatedAt: null,
         },
   getters: {
-    isLoggedIn: (state) => state.id !== null,
+    userIsLoggedIn: (state) => state.id !== null,
   },
   actions: {
     login(user: UserType) {
@@ -35,6 +35,10 @@ export const useUserStore = defineStore("user", {
       this.language = null;
       this.createdAt = null;
       this.updatedAt = null;
+    },
+    setLanguage(language: string) {
+      useLocalStorage().set("user", JSON.stringify({ ...this, language }));
+      this.language = language;
     },
   },
 });

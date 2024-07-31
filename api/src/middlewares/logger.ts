@@ -6,7 +6,14 @@ const loggerMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  console.log("-".repeat(50));
+  console.log(
+    `[${new Date().toISOString()}] ${req.method} ${req.url}\nUser ID: ${
+      req.body.user?.id
+    }\nUser agent: ${req.headers["user-agent"]}`
+  );
+  console.log("-".repeat(50));
+
   next();
 };
 

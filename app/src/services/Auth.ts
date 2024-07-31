@@ -52,7 +52,7 @@ class Auth {
         this.logout();
         return false;
       }
-      return useAPI().getToken() !== null;
+      return useAPI().getToken() !== null && useUserStore().userIsLoggedIn;
     } catch (error) {
       this.logout();
       return false;

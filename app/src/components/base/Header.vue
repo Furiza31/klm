@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SideBar from "@/components/base/SideBar.vue";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/services/Translation";
 import { ArrowLeft } from "lucide-vue-next";
 import { ref, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
@@ -8,6 +9,7 @@ import { RouterLink, useRoute } from "vue-router";
 const route = useRoute();
 const title = ref(route.name);
 const backTo = ref(route.meta.backTo);
+const { t } = useTranslation();
 
 watch(
   () => route.name,
@@ -37,7 +39,7 @@ watch(
       <div v-else class="h-10 w-10"></div>
     </div>
     <div>
-      <h1>{{ title }}</h1>
+      <h1>{{ t(title!.toString()) }}</h1>
     </div>
     <SideBar />
   </header>

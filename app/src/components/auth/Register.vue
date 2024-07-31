@@ -20,11 +20,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { RegisterSchema } from "@/schemas/RegisterSchema";
 import { useAuth } from "@/services/Auth";
+import { useTranslation } from "@/services/Translation";
 import { LoaderCircle } from "lucide-vue-next";
 import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
 import { toast } from "vue-sonner";
 
+const { t } = useTranslation();
 const auth = useAuth();
 const router = useRouter();
 const isLoading = ref(false);
@@ -45,11 +47,11 @@ const onSubmit = form.handleSubmit(async (values) => {
   try {
     await auth.register(values);
   } catch (error: any) {
-    toast.error(error.message);
+    toast.error(t("Register_Failed"));
     isLoading.value = false;
     return;
   }
-  toast.success("Registered successfully!");
+  toast.success(t("Register_Success"));
   router.push({
     name: "Dashboard",
   });
@@ -60,17 +62,16 @@ const onSubmit = form.handleSubmit(async (values) => {
 <template>
   <Card>
     <CardHeader>
-      <CardTitle>Register</CardTitle>
+      <CardTitle>{{ t("Register") }}</CardTitle>
       <CardDescription>
-        Together, we will turn empty spaces into vibrant places filled with
-        warmth and connection.
+        {{ t("Register_Description") }}
       </CardDescription>
     </CardHeader>
     <form @submit="onSubmit">
       <CardContent class="space-y-2">
         <FormField v-slot="{ componentField }" name="username">
           <FormItem>
-            <FormLabel>Username</FormLabel>
+            <FormLabel>{{ t("Username") }}</FormLabel>
             <FormControl>
               <Input type="text" v-bind="componentField" />
             </FormControl>
@@ -79,7 +80,7 @@ const onSubmit = form.handleSubmit(async (values) => {
         </FormField>
         <FormField v-slot="{ componentField }" name="email">
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>{{ t("Email") }}</FormLabel>
             <FormControl>
               <Input type="text" v-bind="componentField" />
             </FormControl>
@@ -88,7 +89,7 @@ const onSubmit = form.handleSubmit(async (values) => {
         </FormField>
         <FormField v-slot="{ componentField }" name="password">
           <FormItem>
-            <FormLabel>Password</FormLabel>
+            <FormLabel>{{ t("Password") }}</FormLabel>
             <FormControl>
               <Input type="password" v-bind="componentField" />
             </FormControl>
@@ -97,7 +98,7 @@ const onSubmit = form.handleSubmit(async (values) => {
         </FormField>
         <FormField v-slot="{ componentField }" name="confirmPassword">
           <FormItem>
-            <FormLabel>Confirm Password</FormLabel>
+            <FormLabel>{{ t("Confirm_Password") }}</FormLabel>
             <FormControl>
               <Input type="password" v-bind="componentField" />
             </FormControl>
@@ -108,7 +109,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       <CardFooter class="flex flex-row justify-center items-center">
         <Button type="submit" class="w-1/2">
           <span v-if="isLoading"><LoaderCircle class="animate-spin" /></span>
-          <span v-else>Submit</span>
+          <span v-else>{{ t("Submit") }}</span>
         </Button>
       </CardFooter>
     </form>

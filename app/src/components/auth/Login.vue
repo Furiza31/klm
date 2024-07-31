@@ -20,10 +20,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { LoginSchema } from "@/schemas/LoginSchema";
 import { useAuth } from "@/services/Auth";
+import { useTranslation } from "@/services/Translation";
 import { LoaderCircle } from "lucide-vue-next";
 import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
 import { toast } from "vue-sonner";
+
+const { t } = useTranslation();
 
 const formSchema = LoginSchema;
 
@@ -45,11 +48,11 @@ const onSubmit = form.handleSubmit(async (values) => {
   try {
     await auth.login(values);
   } catch (error: any) {
-    toast.error(error.message);
+    toast.error(t("Login_Failed"));
     isLoading.value = false;
     return;
   }
-  toast.success("Logged in successfully!");
+  toast.success(t("Login_Success"));
   router.push({
     name: "Dashboard",
   });
@@ -60,17 +63,16 @@ const onSubmit = form.handleSubmit(async (values) => {
 <template>
   <Card>
     <CardHeader>
-      <CardTitle>Login</CardTitle>
+      <CardTitle>{{ t("Login") }}</CardTitle>
       <CardDescription>
-        I fill my heart with fire with you, without you, it's a cold and empty
-        place.
+        {{ t("Login_Description") }}
       </CardDescription>
     </CardHeader>
     <form @submit="onSubmit">
       <CardContent class="space-y-2">
         <FormField v-slot="{ componentField }" name="email">
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>{{ t("Email") }}</FormLabel>
             <FormControl>
               <Input type="text" v-bind="componentField" />
             </FormControl>
@@ -79,7 +81,7 @@ const onSubmit = form.handleSubmit(async (values) => {
         </FormField>
         <FormField v-slot="{ componentField }" name="password">
           <FormItem>
-            <FormLabel>Password</FormLabel>
+            <FormLabel>{{ t("Password") }}</FormLabel>
             <FormControl>
               <Input type="password" v-bind="componentField" />
             </FormControl>
@@ -90,7 +92,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       <CardFooter class="flex flex-row justify-center items-center">
         <Button type="submit" class="w-1/2">
           <span v-if="isLoading"><LoaderCircle class="animate-spin" /></span>
-          <span v-else>Submit</span>
+          <span v-else>{{ t("Submit") }}</span>
         </Button>
       </CardFooter>
     </form>

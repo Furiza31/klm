@@ -18,7 +18,7 @@ import Header from "./Header.vue";
 <style scoped>
 .scale-enter-active,
 .scale-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .scale-enter-from,
@@ -26,5 +26,6 @@ import Header from "./Header.vue";
   opacity: 0;
   transform: scale(0.9);
   filter: blur(1.5px);
+  border-radius: 10px;
 }
 </style>
