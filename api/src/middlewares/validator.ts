@@ -1,9 +1,9 @@
 import { NextFunction, Response } from "express";
 import { validationResult } from "express-validator";
-import { TypedRequestBody } from "../types/express-request-type";
+import { TypedRequest } from "../types/express-request-type";
 
 export const validatorMiddleware = (
-  req: TypedRequestBody<{}>,
+  req: TypedRequest<{}, {}>,
   res: Response,
   next: NextFunction
 ) => {

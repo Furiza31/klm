@@ -2,7 +2,7 @@ import bcryptjs from "bcryptjs";
 import { Response, Router } from "express";
 import { body } from "express-validator";
 import { generateToken, safeUser } from "../../middlewares/auth";
-import { TypedRequestBody } from "../../types/express-request-type";
+import { TypedRequest } from "../../types/express-request-type";
 
 const router = Router();
 
@@ -15,12 +15,15 @@ router.post(
     body("confirmPassword").isString().isLength({ min: 6 }),
   ],
   async (
-    req: TypedRequestBody<{
-      username: string;
-      email: string;
-      password: string;
-      confirmPassword: string;
-    }>,
+    req: TypedRequest<
+      {
+        username: string;
+        email: string;
+        password: string;
+        confirmPassword: string;
+      },
+      {}
+    >,
     res: Response
   ) => {
     const { username, email, password, confirmPassword, prisma } = req.body;
@@ -62,10 +65,13 @@ router.post(
   "/auth/login",
   [body("email").isEmail(), body("password").isString().isLength({ min: 6 })],
   async (
-    req: TypedRequestBody<{
-      email: string;
-      password: string;
-    }>,
+    req: TypedRequest<
+      {
+        email: string;
+        password: string;
+      },
+      {}
+    >,
     res: Response
   ) => {
     const { email, password, prisma } = req.body;

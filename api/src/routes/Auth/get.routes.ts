@@ -1,5 +1,5 @@
 import { Response, Router } from "express";
-import { TypedRequestBody } from "../../types/express-request-type";
+import { TypedRequest } from "../../types/express-request-type";
 
 const router = Router();
 
@@ -7,7 +7,7 @@ router.get("/auth/validate", (_, res) => {
   res.status(200).json({ message: "Validated" });
 });
 
-router.get("/auth/me", (req: TypedRequestBody<{}>, res: Response) => {
+router.get("/auth/me", (req: TypedRequest<{}, {}>, res: Response) => {
   res.status(200).json({
     message: "Me",
     user: req.body.user,

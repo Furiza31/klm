@@ -1,7 +1,7 @@
 import { Response, Router } from "express";
 import { body } from "express-validator";
 import { safeUser } from "../../middlewares/auth";
-import { TypedRequestBody } from "../../types/express-request-type";
+import { TypedRequest } from "../../types/express-request-type";
 
 const router = Router();
 
@@ -13,11 +13,14 @@ router.put(
     body("language").isString().isLength({ min: 5, max: 5 }).optional(),
   ],
   async (
-    req: TypedRequestBody<{
-      username: string;
-      email: string;
-      language: string;
-    }>,
+    req: TypedRequest<
+      {
+        username: string;
+        email: string;
+        language: string;
+      },
+      {}
+    >,
     res: Response
   ) => {
     const { username, email, language, prisma, user } = req.body;

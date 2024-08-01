@@ -1,8 +1,8 @@
 import { NextFunction, Response } from "express";
-import { TypedRequestBody } from "../types/express-request-type";
+import { TypedRequest } from "../types/express-request-type";
 
 const loggerMiddleware = (
-  req: TypedRequestBody<{}>,
+  req: TypedRequest<{}, {}>,
   res: Response,
   next: NextFunction
 ) => {

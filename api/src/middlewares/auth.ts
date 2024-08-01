@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
 import { NextFunction, Response } from "express";
 import jwt from "jsonwebtoken";
-import { TypedRequestBody } from "../types/express-request-type";
+import { TypedRequest } from "../types/express-request-type";
 
 const publicRoutes = ["/", "/health", "/auth/login", "/auth/register"];
 
@@ -23,7 +23,7 @@ export const safeUser = (user: User | Partial<User>) => {
 };
 
 export const auth = async (
-  req: TypedRequestBody<{}>,
+  req: TypedRequest<{}, {}>,
   res: Response,
   next: NextFunction
 ) => {

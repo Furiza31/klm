@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express, { Express, Response } from "express";
 import middlewares from "./middlewares";
 import routes from "./routes/index";
-import { TypedRequestBody } from "./types/express-request-type";
+import { TypedRequest } from "./types/express-request-type";
 import bodyParser = require("body-parser");
 
 dotenv.config();
@@ -18,7 +18,7 @@ app.use(cors());
 app.use(middlewares());
 app.use(routes());
 
-app.get("/", (_: TypedRequestBody<{}>, res: Response) => {
+app.get("/", (_: TypedRequest<{}, {}>, res: Response) => {
   res.redirect("/health");
 });
 

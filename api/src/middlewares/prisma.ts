@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Response } from "express";
-import { TypedRequestBody } from "../types/express-request-type";
+import { TypedRequest } from "../types/express-request-type";
 
 const prisma = new PrismaClient();
 
 export const prismaMiddleware = async (
-  req: TypedRequestBody<{}>,
+  req: TypedRequest<{}, {}>,
   res: Response,
   next: NextFunction
 ) => {
