@@ -2,7 +2,6 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroupItem } from "@/components/ui/radio-group";
 import { LoaderCircle } from "lucide-vue-next";
-import { defineProps } from "vue";
 
 const props = defineProps({
   id: String,
