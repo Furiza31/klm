@@ -39,8 +39,28 @@ watch(
       <div v-else class="h-10 w-10"></div>
     </div>
     <div>
-      <h1>{{ t(title!.toString()) }}</h1>
+      <transition name="slide-up" mode="out-in">
+        <h1 :key="title!.toString()">{{ t(title!.toString()) }}</h1>
+      </transition>
     </div>
     <SideBar />
   </header>
 </template>
+
+<style scoped>
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.15s ease;
+}
+
+.slide-up-enter-from {
+  filter: blur(1.5px);
+  opacity: 0;
+  transform: translateY(10px);
+}
+.slide-up-leave-to {
+  filter: blur(1.5px);
+  opacity: 0;
+  transform: translateY(-10px);
+}
+</style>
