@@ -47,6 +47,11 @@ router.post(
           username,
           email,
           password: hashedPassword,
+          tasksGroups: {
+            create: {
+              title: "Default",
+            },
+          },
         },
       })
     );
