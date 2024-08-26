@@ -76,7 +76,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             <FormControl>
               <Input type="text" v-bind="componentField" />
             </FormControl>
-            <FormMessage />
+            <FormMessage :message="t('Login_Email_Error')" />
           </FormItem>
         </FormField>
         <FormField v-slot="{ componentField }" name="password">
@@ -85,7 +85,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             <FormControl>
               <Input type="password" v-bind="componentField" />
             </FormControl>
-            <FormMessage />
+            <FormMessage :message="t('Login_Password_Error')" />
           </FormItem>
         </FormField>
       </CardContent>

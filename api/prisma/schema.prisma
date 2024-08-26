@@ -25,6 +25,7 @@ model Task {
   status        Boolean  @default(false)
   description   String?
   dueDate       DateTime?
+  dueTime       DateTime?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 

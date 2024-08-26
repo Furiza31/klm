@@ -4,7 +4,7 @@ import { TypedRequest } from "../../types/express-request-type";
 
 const router = Router();
 
-router.get("/groups", async (req: TypedRequest<{}, {}>, res: Response) => {
+router.get("/taskGroups", async (req: TypedRequest<{}, {}>, res: Response) => {
   const { prisma, user } = req.body;
   const { id } = user!;
   const groups = await prisma.taskGroup.findMany({
@@ -22,14 +22,14 @@ router.get("/groups", async (req: TypedRequest<{}, {}>, res: Response) => {
 });
 
 router.get(
-  "/groups/:groupId/tasks",
+  "/taskGroups/:groupId/tasks",
   [param("groupId").isInt()],
-  async (req: TypedRequest<{}, { groupId: number }>, res: Response) => {
+  async (req: TypedRequest<{}, { groupId: string }>, res: Response) => {
     const { groupId } = req.params;
     const { prisma } = req.body;
     const tasks = await prisma.task.findMany({
       where: {
-        groupId,
+        groupId: parseInt(groupId),
       },
     });
 

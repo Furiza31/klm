@@ -15,7 +15,7 @@
   "repository": "https://github.com/Furiza31/klm.git",
   "description": "API for KLM",
   "dependencies": {
-    "@prisma/client": "^5.17.0",
+    "@prisma/client": "^5.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -34,7 +34,7 @@
     "@types/node": "^20.14.10",
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.4",
-    "prisma": "^5.17.0",
+    "prisma": "^5.18.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   }

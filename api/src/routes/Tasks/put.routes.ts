@@ -5,7 +5,7 @@ import { TypedRequest } from "../../types/express-request-type";
 const router = Router();
 
 router.put(
-  "/groups/:groupId",
+  "/taskGroups/:groupId",
   [
     param("groupId").isInt(),
     body("title").isString().isLength({ min: 1, max: 255 }),
@@ -16,7 +16,7 @@ router.put(
         title: string;
       },
       {
-        groupId: number;
+        groupId: string;
       }
     >,
     res: Response
@@ -27,7 +27,7 @@ router.put(
 
     const taskGroup = await prisma.taskGroup.findFirst({
       where: {
-        id: groupId,
+        id: parseInt(groupId),
         userId: id,
       },
     });
@@ -40,7 +40,7 @@ router.put(
 
     const updatedGroup = await prisma.taskGroup.update({
       where: {
-        id: groupId,
+        id: parseInt(groupId),
       },
       data: {
         title,
@@ -57,7 +57,7 @@ router.put(
 );
 
 router.put(
-  "/groups/:groupId/tasks/:taskId",
+  "/taskGroups/:groupId/tasks/:taskId",
   [
     param("groupId").isInt(),
     param("taskId").isInt(),
@@ -65,29 +65,32 @@ router.put(
     body("description").isString().isLength({ min: 1, max: 255 }).optional(),
     body("status").isBoolean().optional(),
     body("dueDate").isDate().optional(),
+    body("dueTime").isDate().optional(),
   ],
   async (
     req: TypedRequest<
       {
-        title: string;
+        title?: string;
         description?: string;
         status?: boolean;
         dueDate?: Date;
+        dueTime?: Date;
       },
       {
-        groupId: number;
-        taskId: number;
+        groupId: string;
+        taskId: string;
       }
     >,
     res: Response
   ) => {
     const { groupId, taskId } = req.params;
-    const { prisma, title, description, status, dueDate, user } = req.body;
+    const { prisma, title, description, status, dueDate, dueTime, user } =
+      req.body;
     const { id } = user!;
 
     const taskGroup = await prisma.taskGroup.findFirst({
       where: {
-        id: groupId,
+        id: parseInt(groupId),
         userId: id,
       },
     });
@@ -100,8 +103,8 @@ router.put(
 
     const task = await prisma.task.findFirst({
       where: {
-        id: taskId,
-        groupId: groupId,
+        id: parseInt(taskId),
+        groupId: parseInt(groupId),
       },
     });
 
@@ -113,13 +116,14 @@ router.put(
 
     const updatedTask = await prisma.task.update({
       where: {
-        id: taskId,
+        id: parseInt(taskId),
       },
       data: {
         title,
         description,
         status,
         dueDate,
+        dueTime,
       },
     });
 

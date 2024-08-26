@@ -5,7 +5,7 @@ import { TypedRequest } from "../../types/express-request-type";
 const router = Router();
 
 router.post(
-  "/groups",
+  "/taskGroups",
   [body("title").isString().isLength({ min: 1, max: 255 })],
   async (
     req: TypedRequest<
@@ -35,13 +35,14 @@ router.post(
 );
 
 router.post(
-  "/groups/:groupId/tasks",
+  "/taskGroups/:groupId/tasks",
   [
     param("groupId").isInt(),
     body("title").isString().isLength({ min: 1, max: 255 }),
-    body("description").isString().isLength({ min: 1, max: 255 }).optional(),
+    body("description").isString().isLength({ min: 1 }).optional(),
     body("status").isBoolean().optional(),
     body("dueDate").isDate().optional(),
+    body("dueTime").isDate().optional(),
   ],
   async (
     req: TypedRequest<
@@ -50,20 +51,22 @@ router.post(
         description?: string;
         status?: boolean;
         dueDate?: Date;
+        dueTime?: Date;
       },
       {
-        groupId: number;
+        groupId: string;
       }
     >,
     res: Response
   ) => {
     const { groupId } = req.params;
-    const { prisma, title, description, status, dueDate, user } = req.body;
+    const { prisma, title, description, status, dueDate, dueTime, user } =
+      req.body;
     const { id } = user!;
 
     const taskGroup = await prisma.taskGroup.findFirst({
       where: {
-        id: groupId,
+        id: parseInt(groupId),
         userId: id,
       },
     });
@@ -80,6 +83,7 @@ router.post(
         description,
         status,
         dueDate,
+        dueTime,
         groupId: taskGroup.id,
       },
     });
