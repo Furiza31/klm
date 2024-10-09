@@ -25,6 +25,7 @@
     "@vueuse/core": "^10.11.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "debounce": "^2.1.1",
     "lucide-vue-next": "^0.408.0",
     "mitt": "^3.0.1",
     "pinia": "^2.1.7",

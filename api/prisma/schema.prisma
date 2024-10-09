@@ -30,7 +30,7 @@ model Task {
   updatedAt     DateTime @updatedAt
 
   groupId       Int
-  group         TaskGroup @relation(fields: [groupId], references: [id])
+  group         TaskGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
 }
 
 model TaskGroup {
