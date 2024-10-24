@@ -46,6 +46,14 @@ export const routes: Array<RouteRecordRaw> = [
         },
       },
       {
+        path: "finances",
+        name: "Finances",
+        component: () => import("@/pages/app/Finances.vue"),
+        meta: {
+          backTo: "Dashboard",
+        },
+      },
+      {
         path: "settings",
         name: "Settings",
         component: () => import("@/pages/app/settings/Index.vue"),

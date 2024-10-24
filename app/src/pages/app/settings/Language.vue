@@ -23,6 +23,7 @@ const onUpdate = async (value: string) => {
     await api.put("/user", { language: value });
   } catch (error: any) {
     toast.error(t("Language_Update_Error"));
+    console.error(error);
     isLoading[value].value = false;
     return;
   }

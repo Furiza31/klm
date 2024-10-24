@@ -94,6 +94,7 @@ const onSubmit = handleSubmit(async (values) => {
     }
   } catch (error: any) {
     toast.error(t("Task_Form_Failed"));
+    console.error(error);
     isLoading.value = false;
     return;
   }

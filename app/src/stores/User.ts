@@ -37,7 +37,15 @@ export const useUserStore = defineStore("user", {
       this.updatedAt = null;
     },
     setLanguage(language: string) {
-      useLocalStorage().set("user", JSON.stringify({ ...this, language }));
+      const userData = {
+        id: this.id,
+        username: this.username,
+        email: this.email,
+        language,
+        createdAt: this.createdAt,
+        updatedAt: this.updatedAt,
+      };
+      useLocalStorage().set("user", JSON.stringify(userData));
       this.language = language;
     },
   },

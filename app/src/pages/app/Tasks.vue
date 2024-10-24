@@ -28,30 +28,32 @@ onMounted(async () => {
     isTasksLoading.value = true;
     const taskGroupsResponse = await api.get("/taskGroups");
     taskGroups.value = taskGroupsResponse.data.groups;
-    selectedTaskGroupId.value = taskGroups.value
-      .filter((group) => group.title === "Default")
-      .map((group) => group.id)[0];
+    selectedTaskGroupId.value = taskGroups.value.filter(
+      (group) => group.title === "Default"
+    )[0]?.id;
     isTaskGroupsLoading.value = false;
   } catch (error) {
     toast.error("Failed to fetch data");
+    console.error(error);
   }
 });
 
-const requestTasks = async () => {
+const requestTasks = async (selectedTaskGroupId: number) => {
   try {
     isTasksLoading.value = true;
     const tasksResponse = await api.get(
-      `taskGroups/${selectedTaskGroupId.value}/tasks`
+      `/taskGroups/${selectedTaskGroupId}/tasks`
     );
     tasks.value = tasksResponse.data.tasks as TaskType[];
     isTasksLoading.value = false;
   } catch (error) {
     toast.error("Failed to fetch tasks");
+    console.error(error);
   }
 };
 
-watch(selectedTaskGroupId, async () => {
-  await requestTasks();
+watch(selectedTaskGroupId, async (newValue) => {
+  await requestTasks(newValue);
 });
 
 watch(tasks, () => {

@@ -2,11 +2,11 @@ let degree = 0;
 let gradientOffsetX = 0;
 let gradientDirection = 1;
 let colorBlendFactor = 0;
-const GRADIENT_SPEED = 1;
+const GRADIENT_SPEED = 5;
 const AMPLITUDE = 50;
 const PERIOD = 1000;
 const SPEED = 2;
-const ORIGINAL_COLORS = ["#4A47A3", "#7E56A6", "#B892F4"];
+const ORIGINAL_COLORS = ["#938FF1", "#A784F1", "#B892F4"];
 const REVERSED_COLORS = [...ORIGINAL_COLORS].reverse();
 
 export const draw = (
@@ -41,10 +41,10 @@ export const draw = (
   ctx.beginPath();
   ctx.moveTo(canvas.width, canvas.height);
   ctx.lineTo(0, canvas.height);
-  ctx.lineTo(0, canvas.height * 0.5);
+  ctx.lineTo(0, canvas.height * 0.55);
   for (let x = 0; x <= canvas.width; x++) {
     let y = -AMPLITUDE * Math.sin((Math.PI / PERIOD) * (degree + x));
-    ctx.lineTo(x, y + canvas.height * 0.5);
+    ctx.lineTo(x, y + canvas.height * 0.55);
   }
   ctx.lineTo(canvas.width, canvas.height);
   ctx.fill();

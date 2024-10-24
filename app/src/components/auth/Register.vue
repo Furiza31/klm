@@ -21,9 +21,9 @@ import { Input } from "@/components/ui/input";
 import { RegisterSchema } from "@/schemas/RegisterSchema";
 import { useAuth } from "@/services/Auth";
 import { useTranslation } from "@/services/Translation";
-import { LoaderCircle } from "lucide-vue-next";
-import { onBeforeMount, ref } from "vue";
-import { useRouter } from "vue-router";
+import { Home, LoaderCircle } from "lucide-vue-next";
+import { ref } from "vue";
+import { RouterLink, useRouter } from "vue-router";
 import { toast } from "vue-sonner";
 
 const { t } = useTranslation();
@@ -37,17 +37,13 @@ const form = useForm({
   validationSchema: formSchema,
 });
 
-onBeforeMount(async () => {
-  const isAuthenticated = await auth.isAuthenticated();
-  if (isAuthenticated) router.push({ name: "Dashboard" });
-});
-
 const onSubmit = form.handleSubmit(async (values) => {
   isLoading.value = true;
   try {
     await auth.register(values);
   } catch (error: any) {
     toast.error(t("Register_Failed"));
+    console.error(error);
     isLoading.value = false;
     return;
   }
@@ -62,8 +58,13 @@ const onSubmit = form.handleSubmit(async (values) => {
 <template>
   <Card>
     <CardHeader>
-      <CardTitle>{{ t("Register") }}</CardTitle>
-      <CardDescription>
+      <CardTitle class="flex flex-row flex-nowrap w-full justify-between mb-2"
+        ><span> {{ t("Register") }}</span>
+        <RouterLink to="/">
+          <Home class="size-6 text-primary" />
+        </RouterLink>
+      </CardTitle>
+      <CardDescription class="text-justify">
         {{ t("Register_Description") }}
       </CardDescription>
     </CardHeader>

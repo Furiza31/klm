@@ -43,6 +43,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     }
   } catch (error) {
     toast.error(t("Task_Group_Form_Failed"));
+    console.error(error);
     isLoading.value = false;
     return;
   }

@@ -48,6 +48,7 @@ const handleCheckUpdate = async (checked: boolean) => {
   } catch (error) {
     console.error(error);
     toast.error(t("Task_Update_Failed"));
+    console.log("error");
     props.task.status = !checked;
     isLoading.value = false;
     return;
@@ -81,6 +82,7 @@ const onTaskDelete = async () => {
   } catch (error) {
     console.error(error);
     toast.error(t("Task_Delete_Failed"));
+    console.log("error");
     isLoading.value = false;
     return;
   }
@@ -101,13 +103,15 @@ const onDropDownMenuStateChange = (isOpen: boolean) => {
   <div
     class="flex flex-row flex-nowrap justify-start items-start gap-2 w-full py-1 task_apear"
   >
-    <Checkbox
-      v-if="!isLoading"
-      class="size-6"
-      v-model:checked="props.task.status"
-      @update:checked="handleCheckUpdate"
-    />
-    <LoaderCircle v-if="isLoading" class="size-6 animate-spin" />
+    <div>
+      <Checkbox
+        v-if="!isLoading"
+        class="size-6"
+        v-model:checked="props.task.status"
+        @update:checked="handleCheckUpdate"
+      />
+      <LoaderCircle v-if="isLoading" class="size-6 animate-spin" />
+    </div>
     <div
       class="flex flex-nowrap w-full justify-start flex-col items-start text-md"
       :class="{

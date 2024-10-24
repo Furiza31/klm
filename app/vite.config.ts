@@ -9,7 +9,7 @@ export default ({ mode }: { mode: string }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   const API_URL = process.env.VITE_API_URL || "http://localhost:3000";
   return defineConfig({
-    base: "./",
+    base: "/",
     css: {
       postcss: {
         plugins: [tailwind(), autoprefixer()],

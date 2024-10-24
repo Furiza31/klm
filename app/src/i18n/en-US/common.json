@@ -4,6 +4,7 @@
   "Register": "Register",
   "Dashboard": "Dashboard",
   "Tasks": "Tasks",
+  "Finances": "Finances",
   "Login_Success": "Logged in successfully!",
   "Login_Failed": "Login failed!",
   "Login_Description": "I fill my heart with fire with you, without you, it's a cold and empty place.",
@@ -65,5 +66,13 @@
   "Task_Action_Menu_Title": "Actions",
   "Task_Action_Menu_Edit": "Edit",
   "Task_Action_Menu_Delete": "Delete",
-  "Task_Delete_Failed": "Failed to delete task!"
+  "Task_Delete_Failed": "Failed to delete task!",
+  "Finances_New_Income": "New income",
+  "Finances_New_Outcome": "New outcome",
+  "Finances_Income": "Income",
+  "Finances_Outcome": "Outcome",
+  "Finances_Bank": "Bank",
+  "Finances_New_Income_Form_Title": "New Income",
+  "Finances_New_Income_Form_Title_Description": "It's the beginning of fortune!",
+  "Finances_New_Income_Form_Field_Title": "Title"
 }

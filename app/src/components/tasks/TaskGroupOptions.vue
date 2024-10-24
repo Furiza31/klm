@@ -50,8 +50,8 @@ const onGroupDelete = async () => {
     isDrawerOpen.value = false;
     emits("onGroupDeleted", (response.data.taskGroup as TaskGroupType).id);
   } catch (error) {
-    console.error(error);
     toast.error(t("Task_Group_Delete_Failed"));
+    console.error(error);
     isDeleteLoading.value = false;
     return;
   }
@@ -67,8 +67,8 @@ const onDeleteAllCompletedTasks = async () => {
     isDrawerOpen.value = false;
     emits("onGroupDeletedAllCompletedTasks", response.data.tasks as TaskType[]);
   } catch (error) {
-    console.error(error);
     toast.error(t("Task_Group_Delete_All_Completed_Tasks_Failed"));
+    console.error(error);
     isDeleteAllCompletedTasksLoading.value = false;
     return;
   }
