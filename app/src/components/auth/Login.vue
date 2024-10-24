@@ -23,7 +23,7 @@ import { useAuth } from "@/services/Auth";
 import { useTranslation } from "@/services/Translation";
 import { Home, LoaderCircle } from "lucide-vue-next";
 import { ref } from "vue";
-import { RouterLink, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { toast } from "vue-sonner";
 
 const { t } = useTranslation();
@@ -59,13 +59,13 @@ const onSubmit = form.handleSubmit(async (values) => {
 <template>
   <Card>
     <CardHeader>
-      <CardTitle class="flex flex-row flex-nowrap w-full justify-between mb-2"
-        ><span> {{ t("Login") }}</span>
+      <CardTitle class="flex flex-row flex-nowrap w-full justify-between mb-2">
+        <span> {{ t("Login") }}</span>
         <RouterLink to="/">
           <Home class="size-6 text-primary" />
         </RouterLink>
       </CardTitle>
-      <CardDescription class="text-justify">
+      <CardDescription>
         {{ t("Login_Description") }}
       </CardDescription>
     </CardHeader>

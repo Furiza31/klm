@@ -58,8 +58,8 @@ const onSubmit = form.handleSubmit(async (values) => {
 <template>
   <Card>
     <CardHeader>
-      <CardTitle class="flex flex-row flex-nowrap w-full justify-between mb-2"
-        ><span> {{ t("Register") }}</span>
+      <CardTitle class="flex flex-row flex-nowrap w-full justify-between mb-2">
+        <span> {{ t("Register") }}</span>
         <RouterLink to="/">
           <Home class="size-6 text-primary" />
         </RouterLink>
