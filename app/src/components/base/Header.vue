@@ -39,9 +39,9 @@ watch(
       <div v-else class="h-10 w-10"></div>
     </div>
     <div>
-      <transition name="slide-up" mode="out-in">
+      <Transition name="slide-up" mode="out-in">
         <h1 :key="title!.toString()">{{ t(title!.toString()) }}</h1>
-      </transition>
+      </Transition>
     </div>
     <SideBar />
   </header>
