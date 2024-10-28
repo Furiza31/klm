@@ -1,5 +1,7 @@
 import { Response, Router } from "express";
 import { param } from "express-validator";
+import { TaskService } from "../../services/task.service";
+import { TaskGroupService } from "../../services/taskGroup.service";
 import { TypedRequest } from "../../types/express-request-type";
 
 const router = Router();
@@ -10,12 +12,15 @@ router.delete(
   async (req: TypedRequest<{}, { groupId: string }>, res: Response) => {
     const { groupId } = req.params;
     const { prisma, user } = req.body;
-    const taskGroup = await prisma.taskGroup.delete({
-      where: {
-        id: parseInt(groupId),
-        userId: user!.id,
-      },
-    });
+    const { id } = user!;
+    const taskGroupService = new TaskGroupService(prisma);
+
+    let taskGroup;
+    try {
+      taskGroup = await taskGroupService.delete(parseInt(groupId), id);
+    } catch (error: any) {
+      return res.status(404).json({ message: error.message });
+    }
 
     res.status(200).json({
       message: "Group deleted successfully",
@@ -35,26 +40,15 @@ router.delete(
   ) => {
     const { groupId, taskId } = req.params;
     const { prisma, user } = req.body;
+    const { id } = user!;
+    const taskService = new TaskService(prisma);
 
-    const taskGroup = await prisma.taskGroup.findFirst({
-      where: {
-        id: parseInt(groupId),
-        userId: user!.id,
-      },
-    });
-
-    if (!taskGroup) {
-      return res.status(404).json({
-        message: "Group not found",
-      });
+    let task;
+    try {
+      task = await taskService.delete(parseInt(taskId), parseInt(groupId), id);
+    } catch (error: any) {
+      return res.status(404).json({ message: error.message });
     }
-
-    const task = await prisma.task.delete({
-      where: {
-        id: parseInt(taskId),
-        groupId: taskGroup.id,
-      },
-    });
 
     res.status(200).json({
       message: "Task deleted successfully",
@@ -71,26 +65,18 @@ router.delete(
   async (req: TypedRequest<{}, { groupId: string }>, res: Response) => {
     const { groupId } = req.params;
     const { prisma, user } = req.body;
+    const { id } = user!;
+    const taskGroupService = new TaskGroupService(prisma);
 
-    const taskGroup = await prisma.taskGroup.findFirst({
-      where: {
-        id: parseInt(groupId),
-        userId: user!.id,
-      },
-    });
-
-    if (!taskGroup) {
-      return res.status(404).json({
-        message: "Group not found",
-      });
+    let tasks;
+    try {
+      tasks = await taskGroupService.deleteCompletedTasks(
+        parseInt(groupId),
+        id
+      );
+    } catch (error: any) {
+      return res.status(404).json({ message: error.message });
     }
-
-    const tasks = await prisma.task.deleteMany({
-      where: {
-        groupId: taskGroup.id,
-        status: true,
-      },
-    });
 
     res.status(200).json({
       message: "Tasks deleted successfully",

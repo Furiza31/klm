@@ -1,5 +1,7 @@
 import { Response, Router } from "express";
 import { body, param } from "express-validator";
+import { TaskService } from "../../services/task.service";
+import { TaskGroupService } from "../../services/taskGroup.service";
 import { TypedRequest } from "../../types/express-request-type";
 
 const router = Router();
@@ -24,33 +26,23 @@ router.put(
     const { groupId } = req.params;
     const { prisma, title, user } = req.body;
     const { id } = user!;
+    const taskGroupService = new TaskGroupService(prisma);
 
-    const taskGroup = await prisma.taskGroup.findFirst({
-      where: {
-        id: parseInt(groupId),
-        userId: id,
-      },
-    });
-
-    if (!taskGroup) {
-      return res.status(404).json({
-        message: "Group not found",
-      });
+    let group;
+    try {
+      group = await taskGroupService.updateTaskGroup(
+        parseInt(groupId),
+        title,
+        id
+      );
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
     }
 
-    const updatedGroup = await prisma.taskGroup.update({
-      where: {
-        id: parseInt(groupId),
-      },
-      data: {
-        title,
-      },
-    });
-
     res.status(200).json({
-      message: `Group ${updatedGroup.title} updated successfully`,
+      message: `Group ${group.title} updated successfully`,
       data: {
-        group: updatedGroup,
+        group: group,
       },
     });
   }
@@ -87,50 +79,28 @@ router.put(
     const { prisma, title, description, status, dueDate, dueTime, user } =
       req.body;
     const { id } = user!;
+    const taskService = new TaskService(prisma);
 
-    const taskGroup = await prisma.taskGroup.findFirst({
-      where: {
-        id: parseInt(groupId),
-        userId: id,
-      },
-    });
-
-    if (!taskGroup) {
-      return res.status(404).json({
-        message: "Group not found",
-      });
-    }
-
-    const task = await prisma.task.findFirst({
-      where: {
-        id: parseInt(taskId),
-        groupId: parseInt(groupId),
-      },
-    });
-
-    if (!task) {
-      return res.status(404).json({
-        message: "Task not found",
-      });
-    }
-
-    const updatedTask = await prisma.task.update({
-      where: {
-        id: parseInt(taskId),
-      },
-      data: {
+    let task;
+    try {
+      task = await taskService.updateTask(
+        parseInt(taskId),
+        parseInt(groupId),
+        id,
         title,
         description,
         status,
         dueDate,
-        dueTime,
-      },
-    });
+        dueTime
+      );
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
+    }
 
     res.status(200).json({
-      message: `Task ${updatedTask.title} updated successfully`,
+      message: `Task ${task.title} updated successfully`,
       data: {
-        task: updatedTask,
+        task: task,
       },
     });
   }

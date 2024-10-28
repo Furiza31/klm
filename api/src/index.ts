@@ -14,7 +14,7 @@ const app: Express = express();
 const port = process.env.PORT || 3000;
 console.log("📦 Loading middlewares 📦");
 const allMiddlewares = middlewares();
-console.log("📦 Loading routes 📦");
+console.log("🛣️ Loading routes 🛣️");
 const allRoutes = routes();
 
 console.log("🔧 Setting up server 🔧");
@@ -31,5 +31,7 @@ app.get("/", (_: TypedRequest<{}, {}>, res: Response) => {
 console.log("✅ Server setup complete ✅");
 
 app.listen(port, () => {
-  console.log(`⚡️ [server]: Server is running at http://localhost:${port}`);
+  console.log(
+    `⚡️ [server]: Server is running at http://localhost:${port} ⚡️`
+  );
 });

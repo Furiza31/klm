@@ -1,7 +1,6 @@
-import bcryptjs from "bcryptjs";
 import { Response, Router } from "express";
 import { body } from "express-validator";
-import { generateToken, safeUser } from "../../middlewares/auth";
+import { AuthService } from "../../services/auth.service";
 import { TypedRequest } from "../../types/express-request-type";
 
 const router = Router();
@@ -27,39 +26,24 @@ router.post(
     res: Response
   ) => {
     const { username, email, password, confirmPassword, prisma } = req.body;
-    if (password !== confirmPassword) {
-      return res.status(400).json({ message: "Passwords do not match" });
-    }
-    const userExist = await prisma.user.findUnique({
-      where: {
+    const authService = new AuthService(prisma);
+    let user, token;
+    try {
+      user = await authService.register({
+        username,
         email,
-      },
-    });
-    if (userExist)
-      return res.status(400).json({ message: "User already exists" });
-    const hashedPassword = bcryptjs.hashSync(
-      password,
-      parseInt(process.env.SALT_ROUNDS as string)
-    );
-    const safedUser = safeUser(
-      await prisma.user.create({
-        data: {
-          username,
-          email,
-          password: hashedPassword,
-          tasksGroups: {
-            create: {
-              title: "Default",
-            },
-          },
-        },
-      })
-    );
-    const token = generateToken(safedUser);
+        password,
+        confirmPassword,
+      });
+      token = AuthService.generateToken(user);
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
+    }
+
     res.status(201).json({
       message: "User created successfully",
       data: {
-        user: safedUser,
+        user,
         token,
       },
     });
@@ -80,20 +64,18 @@ router.post(
     res: Response
   ) => {
     const { email, password, prisma } = req.body;
-    const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
-    if (!user) return res.status(404).json({ message: "User not found" });
-    if (!bcryptjs.compareSync(password, user.password))
-      return res.status(400).json({ message: "Invalid password" });
-    const safedUser = safeUser(user);
-    const token = generateToken(safedUser);
+    const authService = new AuthService(prisma);
+    let user, token;
+    try {
+      user = await authService.login(email, password);
+      token = AuthService.generateToken(user);
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
+    }
     res.status(200).json({
       message: "User logged in successfully",
       data: {
-        user: safedUser,
+        user,
         token,
       },
     });

@@ -2,6 +2,10 @@ import { RequestHandler } from "express";
 import fs from "fs";
 import path from "path";
 
+/**
+ * Load all middlewares from the middlewares folder
+ * @returns {RequestHandler[]} allMiddlewares
+ */
 const middlewares = (): RequestHandler[] => {
   const allMiddlewares: RequestHandler[] = [];
   const middlewaresPath = path.join(__dirname);

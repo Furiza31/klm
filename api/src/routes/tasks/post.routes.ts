@@ -1,5 +1,7 @@
 import { Response, Router } from "express";
 import { body, param } from "express-validator";
+import { TaskService } from "../../services/task.service";
+import { TaskGroupService } from "../../services/taskGroup.service";
 import { TypedRequest } from "../../types/express-request-type";
 
 const router = Router();
@@ -18,12 +20,14 @@ router.post(
   ) => {
     const { prisma, user, title } = req.body;
     const { id } = user!;
-    const group = await prisma.taskGroup.create({
-      data: {
-        title,
-        userId: id!,
-      },
-    });
+    const taskGroupService = new TaskGroupService(prisma);
+
+    let group;
+    try {
+      group = await taskGroupService.addTaskGroup(title, id);
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
+    }
 
     res.status(200).json({
       message: `Group ${group.title} created successfully`,
@@ -63,30 +67,22 @@ router.post(
     const { prisma, title, description, status, dueDate, dueTime, user } =
       req.body;
     const { id } = user!;
+    const taskService = new TaskService(prisma);
 
-    const taskGroup = await prisma.taskGroup.findFirst({
-      where: {
-        id: parseInt(groupId),
-        userId: id,
-      },
-    });
-
-    if (!taskGroup) {
-      return res.status(404).json({
-        message: "Group not found",
-      });
-    }
-
-    const task = await prisma.task.create({
-      data: {
+    let task;
+    try {
+      task = await taskService.addTask(
         title,
+        parseInt(groupId),
+        id,
         description,
         status,
         dueDate,
-        dueTime,
-        groupId: taskGroup.id,
-      },
-    });
+        dueTime
+      );
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
+    }
 
     res.status(200).json({
       message: `Task ${task.title} created successfully`,

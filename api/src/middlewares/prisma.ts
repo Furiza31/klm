@@ -4,6 +4,12 @@ import { TypedRequest } from "../types/express-request-type";
 
 const prisma = new PrismaClient();
 
+/**
+ * Middleware to add Prisma client to the request object
+ * @param req The request object
+ * @param res The response object
+ * @param next The next function
+ */
 export const prismaMiddleware = async (
   req: TypedRequest<{}, {}>,
   res: Response,

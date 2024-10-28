@@ -1,7 +1,11 @@
 import fs from "fs";
 import path from "path";
 
-const routes = () => {
+/**
+ * Load all routes from the routes folder
+ * @returns {Array} allRoutes - Array of all routes
+ */
+const routes = (): Array<any> => {
   const allRoutes = [];
   const routesPath = path.join(__dirname);
   const folders = fs
