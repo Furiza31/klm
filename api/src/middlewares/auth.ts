@@ -22,8 +22,8 @@ export const auth = async (
   if (!token) return res.status(401).json({ message: "Unauthorized" });
 
   try {
-    const decoded = AuthService.verifyToken(token);
-    req.body.user = AuthService.safeUser(decoded as User);
+    const decoded = AuthService.verifyToken({ token });
+    req.body.user = AuthService.safeUser({ user: decoded as User });
     next();
   } catch (error) {
     return res.status(401).json({ message: "Unauthorized" });

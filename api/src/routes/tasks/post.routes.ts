@@ -24,7 +24,7 @@ router.post(
 
     let group;
     try {
-      group = await taskGroupService.addTaskGroup(title, id);
+      group = await taskGroupService.addTaskGroup({ title, userId: id });
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }
@@ -71,15 +71,15 @@ router.post(
 
     let task;
     try {
-      task = await taskService.addTask(
+      task = await taskService.addTask({
         title,
-        parseInt(groupId),
-        id,
+        groupId: parseInt(groupId),
+        userId: id,
         description,
         status,
         dueDate,
-        dueTime
-      );
+        dueTime,
+      });
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }

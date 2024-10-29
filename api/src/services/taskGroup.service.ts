@@ -7,7 +7,13 @@ export class TaskGroupService {
     this.prisma = prisma;
   }
 
-  public async delete(id: number, userId: number | undefined) {
+  public async delete({
+    id,
+    userId,
+  }: {
+    id: number;
+    userId: number | undefined;
+  }) {
     if (!userId) throw new Error("User ID not found");
 
     const taskGroup = await this.prisma.taskGroup.findFirst({
@@ -27,7 +33,13 @@ export class TaskGroupService {
     });
   }
 
-  public async deleteCompletedTasks(id: number, userId: number | undefined) {
+  public async deleteCompletedTasks({
+    id,
+    userId,
+  }: {
+    id: number;
+    userId: number | undefined;
+  }) {
     if (!userId) throw new Error("User ID not found");
 
     const taskGroup = await this.prisma.taskGroup.findFirst({
@@ -47,7 +59,7 @@ export class TaskGroupService {
     });
   }
 
-  public async getTaskGroups(userId: number | undefined) {
+  public async getTaskGroups({ userId }: { userId: number | undefined }) {
     if (!userId) throw new Error("User ID not found");
 
     return await this.prisma.taskGroup.findMany({
@@ -57,7 +69,13 @@ export class TaskGroupService {
     });
   }
 
-  public async addTaskGroup(title: string, userId: number | undefined) {
+  public async addTaskGroup({
+    title,
+    userId,
+  }: {
+    title: string;
+    userId: number | undefined;
+  }) {
     if (!userId) throw new Error("User ID not found");
 
     return await this.prisma.taskGroup.create({
@@ -68,11 +86,15 @@ export class TaskGroupService {
     });
   }
 
-  public async updateTaskGroup(
-    id: number,
-    title: string,
-    userId: number | undefined
-  ) {
+  public async updateTaskGroup({
+    id,
+    title,
+    userId,
+  }: {
+    id: number;
+    title: string;
+    userId: number | undefined;
+  }) {
     if (!userId) throw new Error("User ID not found");
 
     const taskGroup = await this.prisma.taskGroup.findFirst({

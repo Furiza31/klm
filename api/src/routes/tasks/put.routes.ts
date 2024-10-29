@@ -30,11 +30,11 @@ router.put(
 
     let group;
     try {
-      group = await taskGroupService.updateTaskGroup(
-        parseInt(groupId),
+      group = await taskGroupService.updateTaskGroup({
+        id: parseInt(groupId),
         title,
-        id
-      );
+        userId: id,
+      });
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }
@@ -83,16 +83,16 @@ router.put(
 
     let task;
     try {
-      task = await taskService.updateTask(
-        parseInt(taskId),
-        parseInt(groupId),
-        id,
+      task = await taskService.updateTask({
+        id: parseInt(taskId),
+        groupId: parseInt(groupId),
+        userId: id,
         title,
         description,
         status,
         dueDate,
-        dueTime
-      );
+        dueTime,
+      });
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }

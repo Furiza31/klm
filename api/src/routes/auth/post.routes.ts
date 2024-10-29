@@ -35,7 +35,7 @@ router.post(
         password,
         confirmPassword,
       });
-      token = AuthService.generateToken(user);
+      token = AuthService.generateToken({ user });
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }
@@ -67,8 +67,8 @@ router.post(
     const authService = new AuthService(prisma);
     let user, token;
     try {
-      user = await authService.login(email, password);
-      token = AuthService.generateToken(user);
+      user = await authService.login({ email, password });
+      token = AuthService.generateToken({ user });
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }

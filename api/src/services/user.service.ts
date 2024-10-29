@@ -32,20 +32,25 @@ export class UserService {
     return user;
   }
 
-  public async getUserById(id: number) {
+  public async getUserById({ id }: { id: number }) {
     return await this.prisma.user.findUnique({ where: { id } });
   }
 
-  public async getUserByEmail(email: string) {
+  public async getUserByEmail({ email }: { email: string }) {
     return await this.prisma.user.findUnique({ where: { email } });
   }
 
-  public async updateUser(
-    id: number | undefined,
-    username?: string,
-    email?: string,
-    language?: string
-  ) {
+  public async updateUser({
+    id,
+    username,
+    email,
+    language,
+  }: {
+    id: number | undefined;
+    username?: string;
+    email?: string;
+    language?: string;
+  }) {
     if (!id) {
       throw new Error("User ID is required");
     }

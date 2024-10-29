@@ -7,7 +7,15 @@ export class TaskService {
     this.prisma = prisma;
   }
 
-  public async delete(id: number, groupId: number, userId: number | undefined) {
+  public async delete({
+    id,
+    groupId,
+    userId,
+  }: {
+    id: number;
+    groupId: number;
+    userId: number | undefined;
+  }) {
     if (!userId) throw new Error("User ID not found");
 
     const taskGroup = await this.prisma.taskGroup.findFirst({
@@ -27,7 +35,13 @@ export class TaskService {
     });
   }
 
-  public async getTasks(groupId: number, userId: number | undefined) {
+  public async getTasks({
+    groupId,
+    userId,
+  }: {
+    groupId: number;
+    userId: number | undefined;
+  }) {
     if (!userId) throw new Error("User ID not found");
 
     const taskGroup = await this.prisma.taskGroup.findFirst({
@@ -46,15 +60,23 @@ export class TaskService {
     });
   }
 
-  public async addTask(
-    title: string,
-    groupId: number,
-    userId: number | undefined,
-    description?: string,
-    status?: boolean,
-    dueDate?: Date,
-    dueTime?: Date
-  ) {
+  public async addTask({
+    title,
+    groupId,
+    userId,
+    description,
+    status,
+    dueDate,
+    dueTime,
+  }: {
+    title: string;
+    groupId: number;
+    userId: number | undefined;
+    description?: string;
+    status?: boolean;
+    dueDate?: Date;
+    dueTime?: Date;
+  }) {
     if (!userId) throw new Error("User ID not found");
 
     const taskGroup = await this.prisma.taskGroup.findFirst({
@@ -78,16 +100,25 @@ export class TaskService {
     });
   }
 
-  public async updateTask(
-    id: number,
-    groupId: number,
-    userId: number | undefined,
-    title?: string,
-    description?: string,
-    status?: boolean,
-    dueDate?: Date,
-    dueTime?: Date
-  ) {
+  public async updateTask({
+    id,
+    groupId,
+    userId,
+    title,
+    description,
+    status,
+    dueDate,
+    dueTime,
+  }: {
+    id: number;
+    groupId: number;
+    userId: number | undefined;
+    title?: string;
+    description?: string;
+    status?: boolean;
+    dueDate?: Date;
+    dueTime?: Date;
+  }) {
     if (!userId) throw new Error("User ID not found");
 
     const taskGroup = await this.prisma.taskGroup.findFirst({

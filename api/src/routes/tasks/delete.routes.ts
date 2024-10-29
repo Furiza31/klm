@@ -17,7 +17,10 @@ router.delete(
 
     let taskGroup;
     try {
-      taskGroup = await taskGroupService.delete(parseInt(groupId), id);
+      taskGroup = await taskGroupService.delete({
+        id: parseInt(groupId),
+        userId: id,
+      });
     } catch (error: any) {
       return res.status(404).json({ message: error.message });
     }
@@ -45,7 +48,11 @@ router.delete(
 
     let task;
     try {
-      task = await taskService.delete(parseInt(taskId), parseInt(groupId), id);
+      task = await taskService.delete({
+        id: parseInt(taskId),
+        groupId: parseInt(groupId),
+        userId: id,
+      });
     } catch (error: any) {
       return res.status(404).json({ message: error.message });
     }
@@ -70,10 +77,10 @@ router.delete(
 
     let tasks;
     try {
-      tasks = await taskGroupService.deleteCompletedTasks(
-        parseInt(groupId),
-        id
-      );
+      tasks = await taskGroupService.deleteCompletedTasks({
+        id: parseInt(groupId),
+        userId: id,
+      });
     } catch (error: any) {
       return res.status(404).json({ message: error.message });
     }

@@ -30,9 +30,13 @@ router.put(
 
     let updatedUser;
     try {
-      updatedUser = AuthService.safeUser(
-        await userService.updateUser(id, username, email, language)
-      );
+      updatedUser = await userService.updateUser({
+        id,
+        username,
+        email,
+        language,
+      });
+      updatedUser = AuthService.safeUser({ user: updatedUser });
     } catch (error) {
       return res.status(500).json({
         message: "Internal server error",

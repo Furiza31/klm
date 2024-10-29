@@ -13,7 +13,7 @@ router.get("/taskGroups", async (req: TypedRequest<{}, {}>, res: Response) => {
 
   let groups;
   try {
-    groups = await taskGroupService.getTaskGroups(id);
+    groups = await taskGroupService.getTaskGroups({ userId: id });
   } catch (error: any) {
     return res.status(400).json({ message: error.message });
   }
@@ -31,12 +31,16 @@ router.get(
   [param("groupId").isInt()],
   async (req: TypedRequest<{}, { groupId: string }>, res: Response) => {
     const { groupId } = req.params;
-    const { prisma } = req.body;
+    const { prisma, user } = req.body;
+    const { id } = user!;
     const taskService = new TaskService(prisma);
 
     let tasks;
     try {
-      tasks = await taskService.getTasks(parseInt(groupId), req.body.user?.id);
+      tasks = await taskService.getTasks({
+        groupId: parseInt(groupId),
+        userId: id,
+      });
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }
