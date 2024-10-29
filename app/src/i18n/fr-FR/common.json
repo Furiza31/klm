@@ -74,5 +74,6 @@
   "Finances_Bank": "Banque",
   "Finances_New_Income_Form_Title": "Nouveau revenu",
   "Finances_New_Income_Form_Title_Description": "C'est le début de la fortune!",
-  "Finances_New_Income_Form_Field_Titre": "Titre"
+  "Finances_New_Income_Form_Field_Titre": "Titre",
+  "Dashboard_All_Tasks_Completed": "Vous avez terminé"
 }

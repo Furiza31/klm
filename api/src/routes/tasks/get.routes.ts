@@ -54,4 +54,24 @@ router.get(
   }
 );
 
+router.get("/allTasks", async (req: TypedRequest<{}, {}>, res: Response) => {
+  const { prisma, user } = req.body;
+  const { id } = user!;
+  const taskService = new TaskService(prisma);
+
+  let tasks;
+  try {
+    tasks = await taskService.getAllTasks({ userId: id });
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
+  }
+
+  res.status(200).json({
+    message: "Tasks fetched successfully",
+    data: {
+      tasks,
+    },
+  });
+});
+
 export default router;

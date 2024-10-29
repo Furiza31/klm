@@ -10,7 +10,7 @@ import { useAPI } from "@/services/API";
 import { useTranslation } from "@/services/Translation";
 import { TaskGroupType } from "@/types/TaskGroupType";
 import { TaskType } from "@/types/TaskType";
-import { LoaderCircle, Plus } from "lucide-vue-next";
+import { FolderPlus, LoaderCircle, Plus } from "lucide-vue-next";
 import { onMounted, ref, watch } from "vue";
 import { toast } from "vue-sonner";
 
@@ -123,7 +123,7 @@ const onTaskUpdated = (task: TaskType) => {
         >
           <CreateOrEditTaskGroup @on-task-group-created="onTaskGroupCreated">
             <Button variant="outline" size="icon">
-              <Plus class="size-6" />
+              <FolderPlus class="size-6" />
             </Button>
           </CreateOrEditTaskGroup>
           <TaskGroupCard

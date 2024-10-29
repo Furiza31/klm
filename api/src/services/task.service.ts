@@ -154,4 +154,23 @@ export class TaskService {
       },
     });
   }
+
+  public async getAllTasks({ userId }: { userId: number | undefined }) {
+    if (!userId) throw new Error("User ID not found");
+
+    const tasks = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        tasksGroups: {
+          include: {
+            tasks: true,
+          },
+        },
+      },
+    });
+
+    return tasks?.tasksGroups.flatMap((group) => group.tasks) || [];
+  }
 }
