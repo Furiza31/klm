@@ -67,6 +67,11 @@ onMounted(() => {
           KLM
         </text>
       </svg>
+      <p class="text-2xl text-black desc">
+        <span class="text-primary">K</span>eep,
+        <span class="text-primary">L</span>ifestyle,
+        <span class="text-primary">M</span>otivation
+      </p>
       <p class="text-4xl text-black desc">
         Unlock a New Way to Manage Your Life
       </p>
