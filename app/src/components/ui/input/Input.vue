@@ -23,9 +23,12 @@ const modelValue = useVModel(props, "modelValue", emits, {
 
 const showPassword = ref(false);
 
-const inputType = computed(() =>
-  props.type === "password" && !showPassword.value ? "password" : "text"
-);
+const inputType = computed(() => {
+  if (props.type === "password") {
+    return showPassword.value ? "text" : "password";
+  }
+  return props.type || "text";
+});
 
 const togglePassword = () => {
   showPassword.value = !showPassword.value;
@@ -33,7 +36,7 @@ const togglePassword = () => {
 </script>
 
 <template>
-  <div class="relative flex items-center justify-between flex-nowrap">
+  <div class="relative flex items-center">
     <input
       v-model="modelValue"
       :type="inputType"
