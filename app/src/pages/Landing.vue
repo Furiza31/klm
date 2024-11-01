@@ -67,13 +67,8 @@ onMounted(() => {
           KLM
         </text>
       </svg>
-      <p class="text-2xl text-black desc">
-        <span class="text-primary">K</span>eep your
-        <span class="text-primary">L</span>ifestyle,
-        <span class="text-primary">M</span>aximize your potential
-      </p>
       <p class="text-4xl text-black desc">
-        Unlock a New Way to Manage Your Life
+        Keep your Lifestyle, Maximize your potential
       </p>
       <RouterLink to="/auth/register">
         <Button
