@@ -77,6 +77,12 @@ const onSubmit = handleSubmit(async (values) => {
     today.setHours(parseInt(time[0]));
     today.setMinutes(parseInt(time[1]));
     toSend.dueTime = today.toISOString();
+    if (values.dueDate) {
+      const dueDate = new Date(values.dueDate);
+      dueDate.setHours(today.getHours());
+      dueDate.setMinutes(today.getMinutes());
+      toSend.dueDate = dueDate.toISOString();
+    }
   }
   try {
     if (!props.taskToEdit) {
