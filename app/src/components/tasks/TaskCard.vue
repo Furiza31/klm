@@ -130,6 +130,9 @@ const onDropDownMenuStateChange = (isOpen: boolean) => {
             <Badge
               v-if="props.task.dueDate"
               class="mt-1 flex flex-row gap-1 items-center justify-start"
+              :class="{
+                'bg-destructive': new Date(props.task.dueDate) < new Date(),
+              }"
             >
               <CalendarDays class="size-3" />
               <span class="text-xs">{{
@@ -139,6 +142,9 @@ const onDropDownMenuStateChange = (isOpen: boolean) => {
             <Badge
               v-if="props.task.dueTime"
               class="mt-1 flex flex-row gap-1 items-center justify-start"
+              :class="{
+                'bg-destructive': new Date(props.task.dueTime) < new Date(),
+              }"
             >
               <Clock class="size-3" />
               <span class="text-xs">{{ dueTime }}</span>
