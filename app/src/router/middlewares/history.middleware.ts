@@ -7,6 +7,6 @@ export const historyMiddleware = async (
   next: NavigationGuardNext
 ) => {
   const historyServiceInstance = historyService.getInstance();
-  historyServiceInstance.push(to);
+  if (to.meta?.noAuth !== true) historyServiceInstance.push(to);
   next();
 };
