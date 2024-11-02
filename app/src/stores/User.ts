@@ -1,52 +1,47 @@
 import { useLocalStorage } from "@/services/LocalStorage";
 import { UserType } from "@/types/UserType";
 import { defineStore } from "pinia";
+import { computed, Ref, ref } from "vue";
 
-export const useUserStore = defineStore("user", {
-  state: (): UserType =>
+export const useUserStore = defineStore("user", () => {
+  const setUserToNull = (): UserType => {
+    return {
+      id: null,
+      username: null,
+      email: null,
+      language: null,
+      createdAt: null,
+      updatedAt: null,
+    };
+  };
+
+  const user: Ref<UserType> = ref(
     useLocalStorage().get("user")
       ? (JSON.parse(useLocalStorage().get("user") as string) as UserType)
-      : {
-          id: null,
-          username: null,
-          email: null,
-          language: null,
-          createdAt: null,
-          updatedAt: null,
-        },
-  getters: {
-    userIsLoggedIn: (state) => state.id !== null,
-  },
-  actions: {
-    login(user: UserType) {
-      useLocalStorage().set("user", JSON.stringify(user));
-      this.id = user.id;
-      this.username = user.username;
-      this.email = user.email;
-      this.language = user.language;
-      this.createdAt = user.createdAt;
-      this.updatedAt = user.updatedAt;
-    },
-    logout() {
-      useLocalStorage().remove("user");
-      this.id = null;
-      this.username = null;
-      this.email = null;
-      this.language = null;
-      this.createdAt = null;
-      this.updatedAt = null;
-    },
-    setLanguage(language: string) {
-      const userData = {
-        id: this.id,
-        username: this.username,
-        email: this.email,
-        language,
-        createdAt: this.createdAt,
-        updatedAt: this.updatedAt,
-      };
-      useLocalStorage().set("user", JSON.stringify(userData));
-      this.language = language;
-    },
-  },
+      : setUserToNull()
+  );
+  const isAuthenticated = computed(() => user.value.id !== null);
+
+  const login = (userData: UserType) => {
+    useLocalStorage().set("user", JSON.stringify(userData));
+    user.value = userData;
+  };
+
+  const logout = () => {
+    useLocalStorage().remove("user");
+    user.value = setUserToNull();
+  };
+
+  const setLanguage = (language: string) => {
+    user.value.language = language;
+    useLocalStorage().set("user", JSON.stringify(user.value));
+  };
+
+  return {
+    user,
+    isAuthenticated,
+    login,
+    logout,
+    setLanguage,
+  };
 });

@@ -8,9 +8,9 @@ const props = defineProps<{
   class?: HTMLAttributes["class"];
 }>();
 
-const user = useUserStore();
+const userStore = useUserStore();
 const avatar = createAvatar(micah, {
-  seed: user.email as string,
+  seed: userStore.user.email as string,
 }).toDataUri();
 </script>
 

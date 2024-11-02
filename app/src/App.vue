@@ -6,10 +6,10 @@ import { onMounted } from "vue";
 import { RouterView } from "vue-router";
 
 const { locale } = useTranslation();
-const user = useUserStore();
+const userStore = useUserStore();
 
 onMounted(() => {
-  locale.value = (user.language as any) || "en-US";
+  locale.value = (userStore.user.language as any) || "en-US";
 });
 </script>
 

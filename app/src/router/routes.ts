@@ -41,33 +41,21 @@ export const routes: Array<RouteRecordRaw> = [
         path: "tasks",
         name: "Tasks",
         component: () => import("@/pages/app/Tasks.vue"),
-        meta: {
-          backTo: "Dashboard",
-        },
       },
       {
         path: "finances",
         name: "Finances",
         component: () => import("@/pages/app/Finances.vue"),
-        meta: {
-          backTo: "Dashboard",
-        },
       },
       {
         path: "settings",
         name: "Settings",
         component: () => import("@/pages/app/settings/Index.vue"),
-        meta: {
-          backTo: "Dashboard",
-        },
       },
       {
         path: "settings/language",
         name: "Language",
         component: () => import("@/pages/app/settings/Language.vue"),
-        meta: {
-          backTo: "Settings",
-        },
       },
     ],
   },
