@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Toaster } from "@/components/ui/sonner";
-import { useTranslation } from "@/services/Translation";
+import { useTranslation } from "@/services/translation.service";
 import { useUserStore } from "@/stores/User";
 import { onMounted } from "vue";
 import { RouterView } from "vue-router";

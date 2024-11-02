@@ -11,8 +11,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useAPI } from "@/services/API";
-import { useTranslation } from "@/services/Translation";
+import { useAPI } from "@/services/API.service";
+import { useTranslation } from "@/services/translation.service";
 import { TaskGroupType } from "@/types/TaskGroupType";
 import { TaskType } from "@/types/TaskType";
 import {

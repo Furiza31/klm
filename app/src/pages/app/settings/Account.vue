@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTranslation } from "@/services/Translation";
+import { useTranslation } from "@/services/translation.service";
 
 const { t } = useTranslation();
 </script>

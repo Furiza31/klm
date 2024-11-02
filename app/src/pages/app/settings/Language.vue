@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import RadioItem from "@/components/settings/language/RadioItem.vue";
 import { RadioGroup } from "@/components/ui/radio-group";
-import { useAPI } from "@/services/API";
-import { useTranslation } from "@/services/Translation";
+import { useAPI } from "@/services/API.service";
+import { useTranslation } from "@/services/translation.service";
 import { useUserStore } from "@/stores/User";
 import { Ref, ref } from "vue";
 import { toast } from "vue-sonner";

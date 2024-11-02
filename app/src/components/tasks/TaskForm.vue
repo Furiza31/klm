@@ -16,8 +16,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { TaskSchema } from "@/schemas/TaskSchema";
-import { useAPI } from "@/services/API";
-import { useTranslation } from "@/services/Translation";
+import { useAPI } from "@/services/API.service";
+import { useTranslation } from "@/services/translation.service";
 import { TaskType } from "@/types/TaskType";
 import {
   CalendarDate,

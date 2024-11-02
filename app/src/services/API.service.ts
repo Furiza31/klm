@@ -1,4 +1,4 @@
-import { useLocalStorage } from "./LocalStorage";
+import { useLocalStorage } from "./localStorage.service";
 
 class API {
   private static instance: API;

@@ -1,4 +1,4 @@
-import { useLocalStorage } from "@/services/LocalStorage";
+import { useLocalStorage } from "@/services/localStorage.service";
 import { UserType } from "@/types/UserType";
 import { defineStore } from "pinia";
 import { computed, Ref, ref } from "vue";

@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LoginSchema } from "@/schemas/LoginSchema";
-import { useAuth } from "@/services/Auth";
-import { useTranslation } from "@/services/Translation";
+import { useAuth } from "@/services/auth.service";
+import { useTranslation } from "@/services/translation.service";
 import { Home, LoaderCircle } from "lucide-vue-next";
 import { ref } from "vue";
 import { useRouter } from "vue-router";

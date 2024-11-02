@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BackButton from "@/components/base/BackButton.vue";
 import SideBar from "@/components/base/SideBar.vue";
-import { useTranslation } from "@/services/Translation";
+import { useTranslation } from "@/services/translation.service";
 import { ArrowLeft } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 

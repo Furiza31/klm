@@ -2,8 +2,8 @@
 import Login from "@/components/auth/Login.vue";
 import Register from "@/components/auth/Register.vue";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAuth } from "@/services/Auth";
-import { useTranslation } from "@/services/Translation";
+import { useAuth } from "@/services/auth.service";
+import { useTranslation } from "@/services/translation.service";
 import { LoaderCircle } from "lucide-vue-next";
 import { onBeforeMount, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";

@@ -3,7 +3,7 @@ import Bank from "@/components/finances/Bank.vue";
 import Income from "@/components/finances/Income.vue";
 import Outcome from "@/components/finances/Outcome.vue";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useTranslation } from "@/services/Translation";
+import { useTranslation } from "@/services/translation.service";
 import { ArrowDownToDot, ArrowUpFromDot, PiggyBank } from "lucide-vue-next";
 
 const { t } = useTranslation();
