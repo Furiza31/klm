@@ -5,4 +5,5 @@
 ```
 VITE_API_URL="http://localhost:3000"
 VITE_APP_TITLE="KLM"
+VITE_APP_MAX_HISTORY_SIZE=100
 ```
