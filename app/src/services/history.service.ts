@@ -5,6 +5,8 @@ export class historyService {
   private static _instance: historyService;
   private history: RouteLocationNormalized[] = [];
   public events = mitt();
+  private maxHistorySize: number =
+    parseInt(import.meta.env.VITE_APP_MAX_HISTORY_SIZE) || 100;
 
   private constructor() {}
 
@@ -20,6 +22,9 @@ export class historyService {
       this.history.length === 0 ||
       this.history[this.history.length - 1].fullPath !== to.fullPath
     ) {
+      if (this.history.length >= this.maxHistorySize) {
+        this.history.shift();
+      }
       this.history.push(to);
       this.events.emit("update", this.history);
     }
