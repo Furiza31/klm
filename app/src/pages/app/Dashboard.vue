@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAPI } from "@/services/API";
-import { useTranslation } from "@/services/Translation";
+import { useAPI } from "@/services/API.service";
+import { useTranslation } from "@/services/translation.service";
 import { TaskType } from "@/types/TaskType";
 import { CircleCheck, ListTodo, LoaderCircle } from "lucide-vue-next";
 import { computed, onMounted, ref } from "vue";

@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import RadioItem from "@/components/settings/language/RadioItem.vue";
 import { RadioGroup } from "@/components/ui/radio-group";
-import { useAPI } from "@/services/API";
-import { useTranslation } from "@/services/Translation";
+import { useAPI } from "@/services/API.service";
+import { useTranslation } from "@/services/translation.service";
 import { useUserStore } from "@/stores/User";
 import { Ref, ref } from "vue";
 import { toast } from "vue-sonner";
 
 const { t, availableLocales, locale } = useTranslation();
 const api = useAPI();
-const user = useUserStore();
+const userStore = useUserStore();
 const isLoading = availableLocales.reduce((acc, locale) => {
   acc[locale] = ref(false);
   return acc;
@@ -19,7 +19,7 @@ const onUpdate = async (value: string) => {
   isLoading[value].value = true;
   try {
     locale.value = value as any;
-    user.setLanguage(value);
+    userStore.setLanguage(value);
     await api.put("/user", { language: value });
   } catch (error: any) {
     toast.error(t("Language_Update_Error"));

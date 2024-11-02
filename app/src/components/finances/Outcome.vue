@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
-import { useTranslation } from "@/services/Translation";
+import { useTranslation } from "@/services/translation.service";
 import { Plus } from "lucide-vue-next";
 
 const { t } = useTranslation();

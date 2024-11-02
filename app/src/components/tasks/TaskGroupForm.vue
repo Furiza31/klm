@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { TaskGroupSchema } from "@/schemas/TaskGroupSchema";
-import { useTranslation } from "@/services/Translation";
+import { useTranslation } from "@/services/translation.service";
 import { LoaderCircle } from "lucide-vue-next";
 import { useForm } from "vee-validate";
 import { onMounted, ref } from "vue";
@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAPI } from "@/services/API";
+import { useAPI } from "@/services/API.service";
 import { TaskGroupType } from "@/types/TaskGroupType";
 import { toast } from "vue-sonner";
 

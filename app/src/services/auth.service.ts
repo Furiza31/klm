@@ -1,6 +1,6 @@
 import { useUserStore } from "@/stores/User";
 import { UserType } from "@/types/UserType";
-import { useAPI } from "./API";
+import { useAPI } from "./API.service";
 
 class Auth {
   static async login({ email, password }: { email: string; password: string }) {
@@ -52,7 +52,7 @@ class Auth {
         this.logout();
         return false;
       }
-      return useAPI().getToken() !== null && useUserStore().userIsLoggedIn;
+      return useAPI().getToken() !== null && useUserStore().isAuthenticated;
     } catch (error) {
       this.logout();
       return false;

@@ -10,8 +10,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Avatar from "@/components/user/Avatar.vue";
-import { useAuth } from "@/services/Auth";
-import { useTranslation } from "@/services/Translation";
+import { useAuth } from "@/services/auth.service";
+import { useTranslation } from "@/services/translation.service";
 import {
   // HandCoins,
   LayoutDashboard,

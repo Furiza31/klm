@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { IncomeAndOutcomeSchema } from "@/schemas/IncomeAndOutcomeSchema";
-import { useTranslation } from "@/services/Translation";
+import { useTranslation } from "@/services/translation.service";
 import { useForm } from "vee-validate";
 import { ref } from "vue";
 

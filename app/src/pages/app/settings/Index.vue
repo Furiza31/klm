@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
 import Avatar from "@/components/user/Avatar.vue";
-import { useTranslation } from "@/services/Translation";
+import { useTranslation } from "@/services/translation.service";
 import { Languages } from "lucide-vue-next";
 import { RouterLink } from "vue-router";
 

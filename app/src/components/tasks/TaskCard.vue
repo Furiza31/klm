@@ -16,8 +16,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAPI } from "@/services/API";
-import { useTranslation } from "@/services/Translation";
+import { useAPI } from "@/services/API.service";
+import { useTranslation } from "@/services/translation.service";
 import { TaskType } from "@/types/TaskType";
 import { DateFormatter } from "@internationalized/date";
 import {

@@ -1,29 +1,12 @@
 <script setup lang="ts">
+import BackButton from "@/components/base/BackButton.vue";
 import SideBar from "@/components/base/SideBar.vue";
-import { Button } from "@/components/ui/button";
-import { useTranslation } from "@/services/Translation";
+import { useTranslation } from "@/services/translation.service";
 import { ArrowLeft } from "lucide-vue-next";
-import { ref, watch } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
-const title = ref(route.name);
-const backTo = ref(route.meta.backTo);
 const { t } = useTranslation();
-
-watch(
-  () => route.name,
-  (newVal) => {
-    title.value = newVal;
-  }
-);
-
-watch(
-  () => route.meta.backTo,
-  (newVal) => {
-    backTo.value = newVal;
-  }
-);
 </script>
 
 <template>
@@ -31,16 +14,19 @@ watch(
     class="sticky top-0 left-0 h-14 w-full flex flex-row justify-between items-center p-3 backdrop-blur-md rounded-b-xl shadow-sm z-50"
   >
     <div>
-      <Button v-if="backTo" variant="ghost" size="icon">
-        <RouterLink :to="{ name: backTo as string }">
-          <ArrowLeft class="size-7" />
-        </RouterLink>
-      </Button>
-      <div v-else class="h-10 w-10"></div>
+      <BackButton
+        size="icon"
+        variant="ghost"
+        class-if-no-previous-route="h-10 w-10"
+      >
+        <ArrowLeft class="size-7" />
+      </BackButton>
     </div>
     <div>
       <Transition name="slide-up" mode="out-in">
-        <h1 :key="title!.toString()">{{ t(title!.toString()) }}</h1>
+        <h1 :key="route.name">
+          {{ route.name ? t(route.name.toString()) : "" }}
+        </h1>
       </Transition>
     </div>
     <SideBar />
