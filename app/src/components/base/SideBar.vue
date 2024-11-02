@@ -13,7 +13,7 @@ import Avatar from "@/components/user/Avatar.vue";
 import { useAuth } from "@/services/Auth";
 import { useTranslation } from "@/services/Translation";
 import {
-  HandCoins,
+  // HandCoins,
   LayoutDashboard,
   ListTodo,
   LogOut,
@@ -92,7 +92,7 @@ watch(
               <span class="w-5/6 text-center"> {{ t("Tasks") }} </span>
             </Button>
           </RouterLink>
-          <RouterLink
+          <!-- <RouterLink
             :to="{ name: 'Finances' }"
             exactActiveClass="group active"
             class="w-full"
@@ -103,7 +103,7 @@ watch(
               <HandCoins class="size-5" />
               <span class="w-5/6 text-center"> {{ t("Finances") }} </span>
             </Button>
-          </RouterLink>
+          </RouterLink> -->
         </div>
       </div>
       <SheetFooter class="w-full gap-2">

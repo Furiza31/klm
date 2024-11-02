@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# go on the main branch
+git checkout main
+
 # 1. make sure you have the latest version of the code
 git fetch
 git pull
